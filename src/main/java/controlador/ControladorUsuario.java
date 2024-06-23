@@ -56,8 +56,11 @@ public class ControladorUsuario extends HttpServlet {
 		//invocamos al metodo registrar
 		crud.RegistrarUsuario(usuario);		
 		//redirecionamos
-		
-		request.getRequestDispatcher("/ListadoUsuario.jsp").forward(request, response);
+		List<TblUsuariocl2>listadousuario=crud.ListadoUsuario();
+		//invocamos el listado de productos para la vista
+		request.setAttribute("listadousuarios",listadousuario);
+		//redireccionamos
+		request.getRequestDispatcher("/ListadoUsuario.jsp").forward(request,response);
 	}//fin del metodo do post
 
 }

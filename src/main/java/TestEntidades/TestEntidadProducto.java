@@ -13,5 +13,7 @@ public class TestEntidadProducto {
 		producto.setEstadocl2("new");
 		producto.setDescripcl2("te encantara");
 		crud.RegistrarProducto(producto);
+		
+		
 	}
 }

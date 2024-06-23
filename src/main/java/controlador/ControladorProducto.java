@@ -47,11 +47,34 @@ public class ControladorProducto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombrecl2 =request.getParameter("nombrecl2");
-		double precioventacl2 ;
-		precioventacl2 = Double.parseDouble("precioventacl2");
-		Double preciocompcl2=Double.parseDouble("preciocompcl2");
 		String estadocl2=request.getParameter("estadocl2");
 		String descripcl2=request.getParameter("descripcl2");
+		// Inicializar precios
+        double precioventacl2 = 0.0;
+        double preciocompcl2 = 0.0;
+
+        try {
+            // Obtener y convertir los precios a double
+            String precioVentaStr = request.getParameter("precioventacl2");
+            String precioCompraStr = request.getParameter("preciocompcl2");
+
+            System.out.println("precioVentaStr: " + precioVentaStr); // Depuración
+            System.out.println("precioCompraStr: " + precioCompraStr); // Depuración
+
+            // Verificar y convertir los valores de los precios
+            if (precioVentaStr != null && !precioVentaStr.isEmpty()) {
+            	precioventacl2 = Double.parseDouble(precioVentaStr);
+            }
+
+            if (precioCompraStr != null && !precioCompraStr.isEmpty()) {
+            	preciocompcl2 = Double.parseDouble(precioCompraStr);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Imprimir el stack trace para depuración
+            request.setAttribute("error", "Los valores de los precios no son válidos: " + e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+            return;
+        }
 		
 		
 		//instanciar las respectivas entidades
@@ -66,8 +89,11 @@ public class ControladorProducto extends HttpServlet {
 		//invocamos al metodo registrar
 		crud.RegistrarProducto(producto);		
 		//redirecionamos
-		
-		request.getRequestDispatcher("/ListadoProducto.jsp").forward(request, response);
+		List<TblProductocl2>listadoproducto=crud.ListadoProducto();
+		//invocamos el listado de productos para la vista
+		request.setAttribute("listadoProductos",listadoproducto);
+		//redireccionamos
+		request.getRequestDispatcher("/ListadoProducto.jsp").forward(request,response);
 	}//fin del metodo do post
 
 }
