@@ -13,15 +13,14 @@
 <table border="2" align="center">
 
 <tr>
-<td>usuario</td>
-<td><input type="text" name="usuario"></td>
+<td>usuariocl2</td>
+<td><input type="text" name="usuariocl2"></td>
 </tr>
 <tr>
 <td>password</td>
 <td><input type="text" name="password"></td>
 </tr>
 <tr>
-<td>password</td>
 <td colspan="2" align="center">
 <input type="submit" value="Registrar Usuario">
 </td>

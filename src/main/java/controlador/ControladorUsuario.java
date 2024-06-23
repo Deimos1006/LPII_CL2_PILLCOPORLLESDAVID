@@ -33,9 +33,9 @@ public class ControladorUsuario extends HttpServlet {
 		ClassUsuariolmp crud = new ClassUsuariolmp();
 		List<TblUsuariocl2>listadousuario=crud.ListadoUsuario();
 		//invocamos el listado de productos para la vista
-		request.setAttribute("listadousuario",listadousuario);
+		request.setAttribute("listadousuarios",listadousuario);
 		//redireccionamos
-		request.getRequestDispatcher("/ListadoCliente.jsp").forward(request,response);
+		request.getRequestDispatcher("/ListadoUsuario.jsp").forward(request,response);
 	}//fin del metodo do get
 
 	/**
@@ -44,14 +44,14 @@ public class ControladorUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String usuarios=request.getParameter("usuarios");
+		String usuariocl2=request.getParameter("usuariocl2");
 		String password=request.getParameter("password");
 		
 		//instanciar las respectivas entidades
-		TblUsuariocl2 usuario=new TblUsuariocl2();
+		TblUsuariocl2 usuario =new TblUsuariocl2();
 		ClassUsuariolmp crud=new ClassUsuariolmp();
 		//asignamos valores
-		usuario.setUsuariocl2(usuarios);
+		usuario.setUsuariocl2(usuariocl2);
 		usuario.setPasswordcl2(password);
 		//invocamos al metodo registrar
 		crud.RegistrarUsuario(usuario);		
